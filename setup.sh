@@ -2,6 +2,7 @@
 
 export RELEASE=$(lsb_release -is || echo "Ubuntu")
 export ZSH_CUSTOM=$HOME/.oh-my-zsh/custom
+export FONT_PATH="/usr/share/fonts/NerdFonts"
 
 if [ $RELEASE = "Fedora" ];then
 # intall needed packages
@@ -35,7 +36,7 @@ chmod 755 ri
 ./ri install kubecolor -v $(./ri list kubecolor --noformat -n1) -d
 
 # install oh-my-zsh
-./ht --follow -b -o /tmp/install.sh --follow --download https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh
+./ht --follow -b -o /tmp/install.sh --download https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh
 chmod 755 /tmp/install.sh
 /tmp/install.sh --unattended
 rm -f /tmp/install.sh
@@ -45,11 +46,14 @@ git clone https://github.com/zsh-users/zsh-completions.git $ZSH_CUSTOM/plugins/z
 git clone https://github.com/zsh-users/zsh-history-substring-search.git $ZSH_CUSTOM/plugins/zsh-history-substring-search
 
 # install fonts
-./ht --follow -b -o /tmp/install.sh --follow --download https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/install.sh
-chmod 755 /tmp/install.sh
-/tmp/install.sh FiraMono
-/tmp/install.sh GoMono
-rm -f /tmp/install.sh
+./ht --follow -b -o /tmp/GoMono.tar.xz --download https://github.com/ryanoasis/nerd-fonts/releases/latest/download/GoMono.tar.xz
+./ht --follow -b -o /tmp/FiraMono.tar.xz --download https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraMono.tar.xz
+tar xvf /tmp/GoMono.tar.xz -C /tmp
+tar xvf /tmp/FiraMono.tar.xz -C /tmp
+
+sudo mkdir -p $FONT_PATH
+sudo cp /tmp/*.otf $FONT_PATH
+sudo fc-cache -v
 
 # add zsh to user
 sudo sed -i "s/^\($USER.*\)bash/\1zsh/" /etc/passwd
