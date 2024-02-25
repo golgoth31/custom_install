@@ -11,6 +11,14 @@ sudo apt -y update
 sudo apt -y install fonts-font-awesome httpie zsh git fzf
 fi
 
+# install zshrc file
+rm -f $HOME/.zshrc
+cp zshrc $HOME/.zshrc
+
+rm -f $HOME/.config/starship.toml
+mkdir -p $HOME/.config
+cp starship.toml $HOME/.config/starship.toml
+
 # install external software
 mkdir $HOME/bin
 cd $HOME/bin
@@ -39,15 +47,9 @@ git clone https://github.com/zsh-users/zsh-history-substring-search.git $ZSH_CUS
 # install fonts
 ./ht --follow -b -o /tmp/install.sh --follow --download https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/install.sh
 chmod 755 /tmp/install.sh
-/tmp/install.sh FiraMono,GoMono
+/tmp/install.sh FiraMono
+/tmp/install.sh GoMono
 rm -f /tmp/install.sh
-
-# install zshrc file
-rm -f $HOME/.zshrc
-cp zshrc $HOME/.zshrc
-
-rm -f $HOME/.config/starship.toml
-cp starship.toml $HOME/.config/starship.toml
 
 # add zsh to user
 sudo sed -i "s/^\($USER.*\)bash/\1zsh/" /etc/passwd
