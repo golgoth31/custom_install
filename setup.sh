@@ -9,7 +9,7 @@ if [ $RELEASE = "Fedora" ];then
 sudo dnf -y install zsh httpie fontawesome-fonts curl git fzf
 elif [ $RELEASE = "Ubuntu" ];then
 sudo apt -y update
-sudo apt -y install fonts-font-awesome httpie zsh git fzf
+sudo apt -y install fonts-font-awesome httpie zsh git fzf fontconfig
 fi
 
 # install zshrc file
@@ -46,14 +46,15 @@ git clone https://github.com/zsh-users/zsh-completions.git $ZSH_CUSTOM/plugins/z
 git clone https://github.com/zsh-users/zsh-history-substring-search.git $ZSH_CUSTOM/plugins/zsh-history-substring-search
 
 # install fonts
-./ht --follow -b -o /tmp/GoMono.tar.xz --download https://github.com/ryanoasis/nerd-fonts/releases/latest/download/GoMono.tar.xz
+./ht --follow -b -o /tmp/Go-Mono.tar.xz --download https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Go-Mono.tar.xz
 ./ht --follow -b -o /tmp/FiraMono.tar.xz --download https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraMono.tar.xz
-tar xvf /tmp/GoMono.tar.xz -C /tmp
+tar xvf /tmp/Go-Mono.tar.xz -C /tmp
 tar xvf /tmp/FiraMono.tar.xz -C /tmp
 
 sudo mkdir -p $FONT_PATH
+sudo cp /tmp/*.ttf $FONT_PATH
 sudo cp /tmp/*.otf $FONT_PATH
-sudo fc-cache -v
+sudo fc-cache -f
 
 # add zsh to user
 sudo sed -i "s/^\($USER.*\)bash/\1zsh/" /etc/passwd
