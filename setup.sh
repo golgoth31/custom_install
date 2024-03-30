@@ -3,6 +3,7 @@
 export RELEASE=$(lsb_release -is || echo "Ubuntu")
 export ZSH_CUSTOM=$HOME/.oh-my-zsh/custom
 export FONT_PATH="/usr/share/fonts/NerdFonts"
+export INSTALL_DIR=$(pwd)
 
 if [ $RELEASE = "Fedora" ];then
 # intall needed packages
@@ -54,7 +55,7 @@ sudo fc-cache -f
 
 # install zshrc file
 rm -f $HOME/.zshrc
-cp zshrc $HOME/.zshrc
+cp $INSTALL_DIR/zshrc $HOME/.zshrc
 
 # add zsh to user
 sudo sed -i "s/^\($USER.*\)bash/\1zsh/" /etc/passwd
