@@ -1,4 +1,4 @@
-# git clone https://github.com/romkatv/powerlevel10k.git 
+# git clone https://github.com/romkatv/powerlevel10k.git
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 #autoload -U promptinit && promptinit
@@ -19,15 +19,15 @@ HIST_STAMPS="mm/dd/yyyy"
 
 source $ZSH/oh-my-zsh.sh
 
-source <(msk-bin shellwrapper zsh)
-source <(msk-bin completion zsh)
-
 # Customize to your needs...
 export GOPATH=$HOME/Projects/go
 export GOBIN=$GOPATH/bin
 export GO111MODULE=on
 export GOPROXY=https://proxy.golang.org
 export PATH=$HOME/bin:$HOME/.local/bin:$GOBIN:${HOME}/.krew/bin:~/.porter:$PATH
+
+source <(msk-bin shellwrapper zsh)
+source <(msk-bin completion zsh)
 
 eval "$(starship init zsh)"
 
