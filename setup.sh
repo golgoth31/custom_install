@@ -12,10 +12,6 @@ sudo apt -y update
 sudo apt -y install fonts-font-awesome httpie zsh git fzf fontconfig
 fi
 
-# install zshrc file
-rm -f $HOME/.zshrc
-cp zshrc $HOME/.zshrc
-
 rm -f $HOME/.config/starship.toml
 mkdir -p $HOME/.config
 cp starship.toml $HOME/.config/starship.toml
@@ -55,6 +51,10 @@ sudo mkdir -p $FONT_PATH
 sudo cp /tmp/*.ttf $FONT_PATH
 sudo cp /tmp/*.otf $FONT_PATH
 sudo fc-cache -f
+
+# install zshrc file
+rm -f $HOME/.zshrc
+cp zshrc $HOME/.zshrc
 
 # add zsh to user
 sudo sed -i "s/^\($USER.*\)bash/\1zsh/" /etc/passwd
